@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "labs",
+  "compatibility_date": "2026-05-25",
+  // Static-only Worker: serves the Astro build output in ./dist.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+  // Custom domain (labs.soundbluemusic.com) is attached in the Cloudflare dashboard:
+  // Workers & Pages > labs > Settings > Domains & Routes > Add custom domain.
+}

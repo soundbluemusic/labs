@@ -1,0 +1,22 @@
+---
+interface Props {
+  size?: 'sm' | 'lg';
+  class?: string;
+}
+
+const { size = 'sm', class: className = '' } = Astro.props;
+
+const labsCls = size === 'lg' ? 'text-6xl sm:text-7xl' : 'text-2xl';
+const byCls = size === 'lg' ? 'text-base sm:text-lg' : 'text-xs';
+---
+
+<a
+  href="/"
+  class:list={['group inline-flex items-baseline gap-2 no-underline', className]}
+  aria-label="labs by soundbluemusic — 홈"
+>
+  <span class:list={['font-extrabold tracking-tight text-slate-900', labsCls]}>labs</span>
+  <span class:list={['font-medium text-slate-400 lowercase', byCls]}>
+    by sound<span class="text-blue-600">blue</span>music
+  </span>
+</a>

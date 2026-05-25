@@ -1,0 +1,46 @@
+---
+import type { Tool } from '../data/tools';
+
+interface Props {
+  tool: Tool;
+}
+
+const { tool } = Astro.props;
+---
+
+<a
+  href={`/tools/${tool.slug}`}
+  class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+>
+  <div class="mb-3 flex flex-wrap items-center gap-2">
+    <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500">
+      {tool.category}
+    </span>
+    {
+      tool.requiresLogin && (
+        <span class="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+          Claude 로그인 필요
+        </span>
+      )
+    }
+  </div>
+
+  <h2 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-blue-700">
+    {tool.name}
+  </h2>
+  <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-500">{tool.tagline}</p>
+
+  <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600">
+    열기
+    <svg
+      class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </span>
+</a>
