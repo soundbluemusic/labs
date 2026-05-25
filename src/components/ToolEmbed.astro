@@ -35,10 +35,16 @@ const dict = t(lang);
   </div>
 
   <div class="embed-frame">
+    {/* The Claude artifact iframe's inner frame skips rendering when it loads
+        outside the viewport. We defer src assignment until IntersectionObserver
+        sees the iframe entering the viewport so the inner frame measures itself
+        as visible and renders. */}
     <iframe
-      src={tool.embedUrl}
+      data-deferred-src={tool.embedUrl}
       title={tool.name[lang]}
-      loading="lazy"
+      width="100%"
+      height="600"
+      frameborder="0"
       allow="clipboard-write"
       allowfullscreen></iframe>
   </div>
@@ -68,6 +74,27 @@ const dict = t(lang);
 </style>
 
 <script>
+  // Defer setting iframe src until the iframe enters the viewport. Without
+  // this, claude.site's inner iframe checks its visibility on first load and
+  // skips rendering when it's offscreen, leaving the embed blank.
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const iframe = entry.target as HTMLIFrameElement;
+        const src = iframe.dataset.deferredSrc;
+        if (src && !iframe.src) {
+          iframe.src = src;
+        }
+        obs.unobserve(iframe);
+      }
+    },
+    { rootMargin: '200px' },
+  );
+  document
+    .querySelectorAll<HTMLIFrameElement>('iframe[data-deferred-src]')
+    .forEach((iframe) => observer.observe(iframe));
+
   document.querySelectorAll<HTMLButtonElement>('[data-fullscreen]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const container = btn.closest('.tool-embed');
