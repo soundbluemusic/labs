@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://labs.soundbluemusic.com/sitemap-index.xml

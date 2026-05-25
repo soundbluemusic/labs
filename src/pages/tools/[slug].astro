@@ -11,9 +11,39 @@ export function getStaticPaths() {
 }
 
 const { tool } = Astro.props;
+
+const siteUrl = Astro.site?.href ?? 'https://labs.soundbluemusic.com/';
+const toolUrl = new URL(`/tools/${tool.slug}`, siteUrl).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: tool.name,
+      url: toolUrl,
+      description: tool.description,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Web',
+      inLanguage: 'ko',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'KRW' },
+      publisher: { '@type': 'Organization', name: 'soundbluemusic', url: siteUrl },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '홈', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: tool.name, item: toolUrl },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout title={tool.name} description={tool.tagline}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
   <article class="mx-auto max-w-5xl px-5 py-10">
     <a
       href="/"
