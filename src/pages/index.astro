@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Wordmark from '../components/Wordmark.astro';
+import FeaturedTool from '../components/FeaturedTool.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { tools } from '../data/tools';
 
 const siteUrl = Astro.site?.href ?? 'https://labs.soundbluemusic.com/';
 const description =
-  'Claude로 동작하는 도구 모음. 로그인하면 바로 쓸 수 있는 실험적인 도구들입니다.';
+  'soundbluemusic이 만든 AI 도구. Claude로 동작하며, 설치나 API 키 없이 로그인하면 바로 쓸 수 있습니다.';
+
+const [featured, ...rest] = tools;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -33,18 +35,31 @@ const jsonLd = {
 <BaseLayout title="labs by soundbluemusic" description={description}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
-  <section class="mx-auto max-w-5xl px-5 pb-10 pt-16 sm:pt-24">
-    <h1>
-      <Wordmark size="lg" as="span" />
+  <section class="mx-auto max-w-5xl px-5 pb-12 pt-20 sm:pt-28">
+    <h1 class="text-5xl font-bold tracking-tight text-fg sm:text-6xl lg:text-7xl">
+      바로 쓰는 AI 도구.
     </h1>
-    <p class="mt-5 max-w-xl text-lg text-muted sm:text-xl">
-      Claude로 동작하는 도구 모음. 로그인하면 바로 쓸 수 있는 실험적인 도구들입니다.
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
+      soundbluemusic이 만들고 Claude가 움직입니다. 설치도 API 키도 없이, 로그인하면 바로.
     </p>
   </section>
 
-  <section class="mx-auto max-w-5xl px-5 pb-20">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {tools.map((tool) => <ToolCard tool={tool} />)}
+  <section class="mx-auto max-w-5xl px-5 pb-24">
+    <div class="mb-6 flex items-baseline justify-between border-b border-line pb-3">
+      <h2 class="text-sm font-semibold tracking-wide text-muted">도구</h2>
+      <span class="text-sm tabular-nums text-faint">{tools.length}개</span>
     </div>
+
+    {featured && <FeaturedTool tool={featured} />}
+
+    {
+      rest.length > 0 && (
+        <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((tool) => (
+            <ToolCard tool={tool} />
+          ))}
+        </div>
+      )
+    }
   </section>
 </BaseLayout>
