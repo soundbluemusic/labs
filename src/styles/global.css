@@ -1,13 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Typography — Pretendard: the de-facto familiar Korean product sans
-     (covers Korean + Latin), with system fallbacks. */
-  --font-sans:
-    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-    'Segoe UI', Roboto, 'Helvetica Neue', 'Apple SD Gothic Neo', 'Noto Sans KR',
-    'Malgun Gothic', sans-serif;
-
   /* Neutral foundation — production-neutral grayscale (zinc-based).
      Restraint over color variety, like Apple / OpenAI / Vercel. */
   --color-bg: #fafafa;

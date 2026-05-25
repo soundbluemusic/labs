@@ -1,13 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FeaturedTool from '../components/FeaturedTool.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { tools } from '../data/tools';
 
 const siteUrl = Astro.site?.href ?? 'https://labs.soundbluemusic.com/';
-const description = 'soundbluemusic이 직접 만든 도구들. Claude로 동작합니다.';
-
-const [featured, ...rest] = tools;
+const description = 'Claude로 동작하는 도구. Claude에 로그인하면 바로 쓸 수 있습니다.';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -24,8 +21,8 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': `${siteUrl}#org`,
-      name: 'soundbluemusic',
-      url: siteUrl,
+      name: 'SoundBlueMusic',
+      url: 'https://soundbluemusic.com',
     },
   ],
 };
@@ -35,11 +32,11 @@ const jsonLd = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
   <section class="mx-auto max-w-5xl px-5 pb-12 pt-20 sm:pt-28">
-    <h1 class="text-5xl font-bold tracking-tight text-fg sm:text-6xl lg:text-7xl">
-      직접 만든 도구들
+    <h1 class="text-4xl font-bold tracking-tight text-fg sm:text-5xl">
+      Claude로 동작하는 도구
     </h1>
-    <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
-      Claude로 동작합니다.
+    <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+      Claude에 로그인하면 쓸 수 있는 도구 {tools.length}개. 아래에서 바로 시작하세요.
     </p>
   </section>
 
@@ -49,16 +46,8 @@ const jsonLd = {
       <span class="text-sm tabular-nums text-faint">{tools.length}개</span>
     </div>
 
-    {featured && <FeaturedTool tool={featured} />}
-
-    {
-      rest.length > 0 && (
-        <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((tool) => (
-            <ToolCard tool={tool} />
-          ))}
-        </div>
-      )
-    }
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {tools.map((tool) => <ToolCard tool={tool} />)}
+    </div>
   </section>
 </BaseLayout>

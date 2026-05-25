@@ -2,13 +2,41 @@
 import Wordmark from './Wordmark.astro';
 
 const year = new Date().getFullYear();
+
+const social = [
+  { label: 'YouTube', href: 'https://youtube.com/@SoundBlueMusic' },
+  { label: 'X', href: 'https://x.com/SoundBlueMusic' },
+  { label: 'Threads', href: 'https://threads.net/@SoundBlueMusic' },
+  { label: 'Instagram', href: 'https://instagram.com/SoundBlueMusic' },
+];
 ---
 
 <footer class="mt-20 border-t border-line">
-  <div
-    class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-10 text-sm text-faint sm:flex-row sm:items-center sm:justify-between"
-  >
-    <Wordmark size="sm" />
-    <p>© {year} soundbluemusic</p>
+  <div class="mx-auto max-w-5xl px-5 py-10">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <Wordmark size="sm" />
+      <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-faint">
+        {
+          social.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener" class="transition-colors hover:text-fg">
+              {s.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <div
+      class="mt-6 flex flex-col gap-1 text-sm text-faint sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} SoundBlueMusic. All rights reserved.</p>
+      <a
+        href="https://soundbluemusic.com"
+        target="_blank"
+        rel="noopener"
+        class="transition-colors hover:text-fg"
+      >
+        soundbluemusic.com
+      </a>
+    </div>
   </div>
 </footer>
