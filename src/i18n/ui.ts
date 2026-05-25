@@ -40,8 +40,11 @@ export const ui = {
     breadcrumbHome: '홈',
     toolRequiresLoginTitle: '이 도구는 Claude 로그인이 필요합니다.',
     toolRequiresLoginBody:
-      '도구가 Claude AI를 직접 호출하기 때문에, 아래 영역에서 도구를 쓰려면 Claude에 로그인되어 있어야 합니다. 로그인되어 있지 않으면 로그인 안내가 표시됩니다. 생성에 드는 사용량은 본인 Claude 계정에서 소모됩니다.',
+      '도구가 Claude AI를 직접 호출하기 때문에, Claude에 로그인되어 있어야 사용할 수 있어요. 생성 사용량은 본인 Claude 계정에서 소모됩니다.',
+    toolRequiresLoginHint:
+      '아래 임베드 안의 로그인 버튼이 동작하지 않으면(Safari 등 3rd-party 쿠키 제한), 먼저 claude.ai에 로그인하거나 「Claude에서 열기」로 새 탭에서 사용하세요.',
     toolRequiresLoginCTA: 'claude.ai 로그인 →',
+    toolOpenInClaude: 'Claude에서 열기 ↗',
     toolSourceLabel: '원본 아티팩트:',
     toolSourceLink: 'claude.site에서 보기 ↗',
     embedFullscreen: '전체화면',
@@ -66,8 +69,11 @@ export const ui = {
     breadcrumbHome: 'Home',
     toolRequiresLoginTitle: 'This tool requires a Claude login.',
     toolRequiresLoginBody:
-      "Because the tool calls Claude AI directly, you need to be signed in to Claude to use it from the panel below. If you aren't signed in, a sign-in prompt will appear. Generation usage is billed to your own Claude account.",
+      'Because the tool calls Claude AI directly, you need to be signed in to Claude to use it. Generation usage is billed to your own Claude account.',
+    toolRequiresLoginHint:
+      "If the login button inside the embed below doesn't respond (some browsers block third-party cookies, e.g. Safari), sign in to claude.ai first, or use “Open in Claude” to launch it in a new tab.",
     toolRequiresLoginCTA: 'Sign in to claude.ai →',
+    toolOpenInClaude: 'Open in Claude ↗',
     toolSourceLabel: 'Original artifact:',
     toolSourceLink: 'View on claude.site ↗',
     embedFullscreen: 'Fullscreen',
@@ -92,8 +98,11 @@ export const ui = {
     breadcrumbHome: 'ホーム',
     toolRequiresLoginTitle: 'このツールはClaudeへのログインが必要です。',
     toolRequiresLoginBody:
-      'ツールが直接Claude AIを呼び出すため、下の領域でツールを使うにはClaudeにログインしている必要があります。ログインしていない場合はログイン案内が表示されます。生成に使う消費量はご自身のClaudeアカウントから引かれます。',
+      'ツールが直接Claude AIを呼び出すため、Claudeにログインしている必要があります。生成に使う消費量はご自身のClaudeアカウントから引かれます。',
+    toolRequiresLoginHint:
+      '下の埋め込み内のログインボタンが反応しない場合(Safariなどサードパーティ Cookie 制限)、先に claude.ai でログインするか、「Claudeで開く」から新しいタブで使用してください。',
     toolRequiresLoginCTA: 'claude.aiにログイン →',
+    toolOpenInClaude: 'Claudeで開く ↗',
     toolSourceLabel: '元のアーティファクト:',
     toolSourceLink: 'claude.siteで開く ↗',
     embedFullscreen: '全画面',

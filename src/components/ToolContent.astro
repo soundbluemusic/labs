@@ -76,17 +76,26 @@ const jsonLd = {
       tool.requiresLogin && (
         <div class="mt-6 max-w-2xl rounded-xl border border-accent-line bg-accent-soft p-4 text-sm">
           <p class="font-semibold text-fg">{dict.toolRequiresLoginTitle}</p>
-          <p class="mt-1 leading-relaxed text-muted">
-            {dict.toolRequiresLoginBody}{' '}
+          <p class="mt-1 leading-relaxed text-muted">{dict.toolRequiresLoginBody}</p>
+          <p class="mt-2 leading-relaxed text-muted">{dict.toolRequiresLoginHint}</p>
+          <div class="mt-3 flex flex-wrap items-center gap-2">
             <a
-              class="font-medium text-accent-strong underline"
+              class="inline-flex items-center gap-1 rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-strong"
+              href={tool.artifactUrl}
+              target="_blank"
+              rel="noopener"
+            >
+              {dict.toolOpenInClaude}
+            </a>
+            <a
+              class="inline-flex items-center gap-1 rounded-lg border border-accent-line px-3 py-1.5 text-sm font-medium text-accent-strong transition-colors hover:bg-accent-soft"
               href="https://claude.ai/login"
               target="_blank"
               rel="noopener"
             >
               {dict.toolRequiresLoginCTA}
             </a>
-          </p>
+          </div>
         </div>
       )
     }
