@@ -5,8 +5,7 @@ import ToolCard from '../components/ToolCard.astro';
 import { tools } from '../data/tools';
 
 const siteUrl = Astro.site?.href ?? 'https://labs.soundbluemusic.com/';
-const description =
-  'soundbluemusic이 만든 AI 도구. Claude로 동작하며, 설치나 API 키 없이 로그인하면 바로 쓸 수 있습니다.';
+const description = 'soundbluemusic이 직접 만든 도구들. Claude로 동작합니다.';
 
 const [featured, ...rest] = tools;
 
@@ -37,10 +36,10 @@ const jsonLd = {
 
   <section class="mx-auto max-w-5xl px-5 pb-12 pt-20 sm:pt-28">
     <h1 class="text-5xl font-bold tracking-tight text-fg sm:text-6xl lg:text-7xl">
-      바로 쓰는 AI 도구.
+      직접 만든 도구들
     </h1>
     <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
-      soundbluemusic이 만들고 Claude가 움직입니다. 설치도 API 키도 없이, 로그인하면 바로.
+      Claude로 동작합니다.
     </p>
   </section>
 
