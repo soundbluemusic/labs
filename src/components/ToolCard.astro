@@ -10,27 +10,27 @@ const { tool } = Astro.props;
 
 <a
   href={`/tools/${tool.slug}`}
-  class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+  class="group flex flex-col rounded-2xl border border-line bg-surface p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-accent-line hover:shadow-md"
 >
   <div class="mb-3 flex flex-wrap items-center gap-2">
-    <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500">
+    <span class="rounded-full bg-line-subtle px-2.5 py-1 text-xs font-medium text-muted">
       {tool.category}
     </span>
     {
       tool.requiresLogin && (
-        <span class="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+        <span class="rounded-full bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent-strong">
           Claude 로그인 필요
         </span>
       )
     }
   </div>
 
-  <h2 class="text-lg font-semibold text-slate-900 transition-colors group-hover:text-blue-700">
+  <h2 class="text-lg font-semibold text-fg transition-colors group-hover:text-accent-strong">
     {tool.name}
   </h2>
-  <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-500">{tool.tagline}</p>
+  <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{tool.tagline}</p>
 
-  <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600">
+  <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
     열기
     <svg
       class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
