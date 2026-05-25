@@ -18,14 +18,14 @@ const { tool } = Astro.props;
     </span>
     {
       tool.requiresLogin && (
-        <span class="rounded-full bg-accent-soft px-2.5 py-1 text-xs font-medium text-accent-strong">
+        <span class="rounded-full bg-fg px-2.5 py-1 text-xs font-medium text-accent-fg">
           Claude 로그인 필요
         </span>
       )
     }
   </div>
 
-  <h2 class="text-lg font-semibold text-fg transition-colors group-hover:text-accent-strong">
+  <h2 class="text-lg font-semibold text-fg">
     {tool.name}
   </h2>
   <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{tool.tagline}</p>

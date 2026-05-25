@@ -18,12 +18,13 @@
   --color-line: #e4e4e7;
   --color-line-subtle: #f4f4f5;
 
-  /* Single confident accent — "soundblue". Used sparingly. */
-  --color-accent: #2563eb;
-  --color-accent-strong: #1d4ed8;
+  /* Accent = neutral near-black (monochrome). No hue, so it avoids any
+     brand/political color reading; emphasis comes from value, not color. */
+  --color-accent: #18181b;
+  --color-accent-strong: #000000;
   --color-accent-fg: #ffffff;
-  --color-accent-soft: #eff4ff;
-  --color-accent-line: #d9e4ff;
+  --color-accent-soft: #f4f4f5;
+  --color-accent-line: #d4d4d8;
 }
 
 html {
