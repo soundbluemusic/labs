@@ -2,10 +2,18 @@
 interface Props {
   size?: 'sm' | 'lg';
   as?: 'a' | 'span';
+  href?: string;
+  ariaLabel?: string;
   class?: string;
 }
 
-const { size = 'sm', as = 'a', class: className = '' } = Astro.props;
+const {
+  size = 'sm',
+  as = 'a',
+  href = '/',
+  ariaLabel = 'labs by soundbluemusic',
+  class: className = '',
+} = Astro.props;
 
 const labsCls = size === 'lg' ? 'text-6xl sm:text-7xl' : 'text-2xl';
 const byCls = size === 'lg' ? 'text-base sm:text-lg' : 'text-xs';
@@ -15,9 +23,9 @@ const Tag = as;
 ---
 
 <Tag
-  href={isLink ? '/' : undefined}
+  href={isLink ? href : undefined}
   class:list={['group inline-flex items-baseline gap-2 no-underline', className]}
-  aria-label={isLink ? 'labs by soundbluemusic — 홈' : undefined}
+  aria-label={isLink ? ariaLabel : undefined}
 >
   <span class:list={['font-extrabold tracking-tight text-fg', labsCls]}>labs</span>
   <span class:list={['font-medium text-faint lowercase', byCls]}>

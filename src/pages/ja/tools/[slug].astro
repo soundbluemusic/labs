@@ -1,6 +1,6 @@
 ---
-import ToolContent from '../../components/ToolContent.astro';
-import { tools } from '../../data/tools';
+import ToolContent from '../../../components/ToolContent.astro';
+import { tools } from '../../../data/tools';
 
 export function getStaticPaths() {
   return tools.map((tool) => ({
@@ -12,4 +12,4 @@ export function getStaticPaths() {
 const { tool } = Astro.props;
 ---
 
-<ToolContent lang="ko" tool={tool} />
+<ToolContent lang="ja" tool={tool} />

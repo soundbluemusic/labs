@@ -1,0 +1,40 @@
+---
+import { locales, localeNames, localeShortLabels, type Locale } from '../i18n/ui';
+import { localizePath, t } from '../i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
+const dict = t(lang);
+---
+
+<nav
+  class="flex items-center gap-0.5 rounded-full border border-line bg-surface p-0.5 text-xs"
+  aria-label={dict.langSwitcherLabel}
+>
+  {
+    locales.map((code) => {
+      const href = localizePath(currentPath, code);
+      const isActive = code === lang;
+      return (
+        <a
+          href={href}
+          hreflang={code}
+          aria-current={isActive ? 'true' : undefined}
+          class:list={[
+            'rounded-full px-2.5 py-1 font-medium tabular-nums transition-colors',
+            isActive
+              ? 'bg-fg text-accent-fg'
+              : 'text-muted hover:bg-line-subtle hover:text-fg',
+          ]}
+          title={localeNames[code]}
+        >
+          {localeShortLabels[code]}
+        </a>
+      );
+    })
+  }
+</nav>

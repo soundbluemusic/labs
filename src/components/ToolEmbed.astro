@@ -1,11 +1,15 @@
 ---
 import type { Tool } from '../data/tools';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/ui';
 
 interface Props {
   tool: Tool;
+  lang: Locale;
 }
 
-const { tool } = Astro.props;
+const { tool, lang } = Astro.props;
+const dict = t(lang);
 ---
 
 <div class="tool-embed overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
@@ -17,7 +21,7 @@ const { tool } = Astro.props;
         data-fullscreen
         class="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-line-subtle hover:text-fg"
       >
-        전체화면
+        {dict.embedFullscreen}
       </button>
       <a
         href={tool.embedUrl}
@@ -25,7 +29,7 @@ const { tool } = Astro.props;
         rel="noopener"
         class="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-line-subtle hover:text-fg"
       >
-        새 탭에서 열기 ↗
+        {dict.embedNewTab}
       </a>
     </div>
   </div>
@@ -33,7 +37,7 @@ const { tool } = Astro.props;
   <div class="embed-frame">
     <iframe
       src={tool.embedUrl}
-      title={tool.name}
+      title={tool.name[lang]}
       loading="lazy"
       allow="clipboard-write"
       allowfullscreen></iframe>
