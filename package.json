@@ -10,17 +10,27 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "deploy": "pnpm build && wrangler deploy"
+    "deploy": "pnpm build && wrangler deploy",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.2",
-    "astro": "^6.3.7"
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@tailwindcss/vite": "^4.3.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
-    "wrangler": "^4.94.0"
+    "wrangler": "^4.95.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "yaml": "^2.8.3"
+    }
   }
 }
