@@ -1,24 +1,33 @@
 ---
-import Wordmark from './Wordmark.astro';
+import Wordmark from "./Wordmark.astro";
 
 const year = new Date().getFullYear();
 
 const social = [
-  { label: 'YouTube', href: 'https://youtube.com/@SoundBlueMusic' },
-  { label: 'X', href: 'https://x.com/SoundBlueMusic' },
-  { label: 'Threads', href: 'https://threads.net/@SoundBlueMusic' },
-  { label: 'Instagram', href: 'https://instagram.com/SoundBlueMusic' },
+  { label: "YouTube", href: "https://youtube.com/@SoundBlueMusic" },
+  { label: "X", href: "https://x.com/SoundBlueMusic" },
+  { label: "Threads", href: "https://threads.net/@SoundBlueMusic" },
+  { label: "Instagram", href: "https://instagram.com/SoundBlueMusic" },
 ];
 ---
 
-<footer class="mt-20 border-t border-line">
+<footer class="border-line mt-20 border-t">
   <div class="mx-auto max-w-5xl px-5 py-10">
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"
+    >
       <Wordmark size="sm" />
-      <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-faint">
+      <nav
+        class="text-faint flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"
+      >
         {
           social.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener" class="transition-colors hover:text-fg">
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener"
+              class="hover:text-fg transition-colors"
+            >
               {s.label}
             </a>
           ))
@@ -26,14 +35,14 @@ const social = [
       </nav>
     </div>
     <div
-      class="mt-6 flex flex-col gap-1 text-sm text-faint sm:flex-row sm:items-center sm:justify-between"
+      class="text-faint mt-6 flex flex-col gap-1 text-sm sm:flex-row sm:items-center sm:justify-between"
     >
       <p>© {year} SoundBlueMusic. All rights reserved.</p>
       <a
         href="https://soundbluemusic.com"
         target="_blank"
         rel="noopener"
-        class="transition-colors hover:text-fg"
+        class="hover:text-fg transition-colors"
       >
         soundbluemusic.com
       </a>

@@ -1,7 +1,7 @@
 ---
-import type { Tool } from '../data/tools';
-import { t } from '../i18n/utils';
-import type { Locale } from '../i18n/ui';
+import type { Tool } from "../data/tools";
+import { t } from "../i18n/utils";
+import type { Locale } from "../i18n/ui";
 
 interface Props {
   tool: Tool;
@@ -12,14 +12,18 @@ const { tool, lang } = Astro.props;
 const dict = t(lang);
 ---
 
-<div class="tool-embed overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
-  <div class="flex items-center justify-between gap-2 border-b border-line-subtle px-4 py-2.5">
-    <span class="truncate font-mono text-xs text-faint">{tool.slug}</span>
+<div
+  class="tool-embed border-line bg-surface overflow-hidden rounded-2xl border shadow-sm"
+>
+  <div
+    class="border-line-subtle flex items-center justify-between gap-2 border-b px-4 py-2.5"
+  >
+    <span class="text-faint truncate font-mono text-xs">{tool.slug}</span>
     <div class="flex shrink-0 items-center gap-1">
       <button
         type="button"
         data-fullscreen
-        class="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-line-subtle hover:text-fg"
+        class="text-muted hover:bg-line-subtle hover:text-fg rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors"
       >
         {dict.embedFullscreen}
       </button>
@@ -27,7 +31,7 @@ const dict = t(lang);
         href={tool.embedUrl}
         target="_blank"
         rel="noopener"
-        class="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-line-subtle hover:text-fg"
+        class="text-muted hover:bg-line-subtle hover:text-fg rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors"
       >
         {dict.embedNewTab}
       </a>
@@ -35,10 +39,12 @@ const dict = t(lang);
   </div>
 
   <div class="embed-frame">
-    {/* The Claude artifact iframe's inner frame skips rendering when it loads
+    {
+      /* The Claude artifact iframe's inner frame skips rendering when it loads
         outside the viewport. We defer src assignment until IntersectionObserver
         sees the iframe entering the viewport so the inner frame measures itself
-        as visible and renders. */}
+        as visible and renders. */
+    }
     <iframe
       data-deferred-src={tool.embedUrl}
       title={tool.name[lang]}
@@ -89,16 +95,18 @@ const dict = t(lang);
         obs.unobserve(iframe);
       }
     },
-    { rootMargin: '200px' },
+    { rootMargin: "200px" },
   );
   document
-    .querySelectorAll<HTMLIFrameElement>('iframe[data-deferred-src]')
+    .querySelectorAll<HTMLIFrameElement>("iframe[data-deferred-src]")
     .forEach((iframe) => observer.observe(iframe));
 
-  document.querySelectorAll<HTMLButtonElement>('[data-fullscreen]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const container = btn.closest('.tool-embed');
-      container?.requestFullscreen?.();
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-fullscreen]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const container = btn.closest(".tool-embed");
+        container?.requestFullscreen?.();
+      });
     });
-  });
 </script>

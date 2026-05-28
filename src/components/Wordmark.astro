@@ -1,34 +1,39 @@
 ---
 interface Props {
-  size?: 'sm' | 'lg';
-  as?: 'a' | 'span';
+  size?: "sm" | "lg";
+  as?: "a" | "span";
   href?: string;
   ariaLabel?: string;
   class?: string;
 }
 
 const {
-  size = 'sm',
-  as = 'a',
-  href = '/',
-  ariaLabel = 'labs by soundbluemusic',
-  class: className = '',
+  size = "sm",
+  as = "a",
+  href = "/",
+  ariaLabel = "labs by soundbluemusic",
+  class: className = "",
 } = Astro.props;
 
-const labsCls = size === 'lg' ? 'text-6xl sm:text-7xl' : 'text-2xl';
-const byCls = size === 'lg' ? 'text-base sm:text-lg' : 'text-xs';
+const labsCls = size === "lg" ? "text-6xl sm:text-7xl" : "text-2xl";
+const byCls = size === "lg" ? "text-base sm:text-lg" : "text-xs";
 
-const isLink = as === 'a';
+const isLink = as === "a";
 const Tag = as;
 ---
 
 <Tag
   href={isLink ? href : undefined}
-  class:list={['group inline-flex items-baseline gap-2 no-underline', className]}
+  class:list={[
+    "group inline-flex items-baseline gap-2 no-underline",
+    className,
+  ]}
   aria-label={isLink ? ariaLabel : undefined}
 >
-  <span class:list={['font-extrabold tracking-tight text-fg', labsCls]}>labs</span>
-  <span class:list={['font-medium text-faint lowercase', byCls]}>
+  <span class:list={["text-fg font-extrabold tracking-tight", labsCls]}
+    >labs</span
+  >
+  <span class:list={["text-faint font-medium lowercase", byCls]}>
     by soundbluemusic
   </span>
 </Tag>

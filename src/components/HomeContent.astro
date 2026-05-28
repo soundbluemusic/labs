@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ToolCard from './ToolCard.astro';
-import { tools } from '../data/tools';
-import { localizePath, t } from '../i18n/utils';
-import { htmlLangAttr, ui, type Locale } from '../i18n/ui';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ToolCard from "./ToolCard.astro";
+import { tools } from "../data/tools";
+import { localizePath, t } from "../i18n/utils";
+import { htmlLangAttr, ui, type Locale } from "../i18n/ui";
 
 interface Props {
   lang: Locale;
@@ -12,47 +12,61 @@ interface Props {
 const { lang } = Astro.props;
 const dict = t(lang);
 
-const siteUrl = Astro.site?.href ?? 'https://labs.soundbluemusic.com/';
-const pageUrl = new URL(localizePath('/', lang), siteUrl).href;
+const siteUrl = Astro.site?.href ?? "https://labs.soundbluemusic.com/";
+const pageUrl = new URL(localizePath("/", lang), siteUrl).href;
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'WebSite',
-      '@id': `${pageUrl}#website`,
+      "@type": "WebSite",
+      "@id": `${pageUrl}#website`,
       url: pageUrl,
       name: ui[lang].siteName,
       description: dict.siteDescription,
       inLanguage: htmlLangAttr[lang],
-      publisher: { '@id': `${siteUrl}#org` },
+      publisher: { "@id": `${siteUrl}#org` },
     },
     {
-      '@type': 'Organization',
-      '@id': `${siteUrl}#org`,
-      name: 'SoundBlueMusic',
-      url: 'https://soundbluemusic.com',
+      "@type": "Organization",
+      "@id": `${siteUrl}#org`,
+      name: "SoundBlueMusic",
+      url: "https://soundbluemusic.com",
     },
   ],
 };
 ---
 
-<BaseLayout lang={lang} title={dict.siteName} description={dict.siteDescription}>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+<BaseLayout
+  lang={lang}
+  title={dict.siteName}
+  description={dict.siteDescription}
+>
+  <script
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(jsonLd)}
+  />
 
-  <section class="mx-auto max-w-5xl px-5 pb-12 pt-20 sm:pt-28">
-    <h1 class="text-4xl font-bold tracking-tight text-fg sm:text-5xl">
+  <section class="mx-auto max-w-5xl px-5 pt-20 pb-12 sm:pt-28">
+    <h1 class="text-fg text-4xl font-bold tracking-tight sm:text-5xl">
       {dict.homeHeroTitle}
     </h1>
-    <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+    <p class="text-muted mt-5 max-w-xl text-lg leading-relaxed">
       {dict.homeHeroLead(tools.length)}
     </p>
   </section>
 
   <section class="mx-auto max-w-5xl px-5 pb-24">
-    <div class="mb-6 flex items-baseline justify-between border-b border-line pb-3">
-      <h2 class="text-sm font-semibold tracking-wide text-muted">{dict.homeSectionLabel}</h2>
-      <span class="text-sm tabular-nums text-faint">{dict.homeCountSuffix(tools.length)}</span>
+    <div
+      class="border-line mb-6 flex items-baseline justify-between border-b pb-3"
+    >
+      <h2 class="text-muted text-sm font-semibold tracking-wide">
+        {dict.homeSectionLabel}
+      </h2>
+      <span class="text-faint text-sm tabular-nums"
+        >{dict.homeCountSuffix(tools.length)}</span
+      >
     </div>
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,6 +1,11 @@
 ---
-import { locales, localeNames, localeShortLabels, type Locale } from '../i18n/ui';
-import { localizePath, t } from '../i18n/utils';
+import {
+  locales,
+  localeNames,
+  localeShortLabels,
+  type Locale,
+} from "../i18n/ui";
+import { localizePath, t } from "../i18n/utils";
 
 interface Props {
   lang: Locale;
@@ -12,7 +17,7 @@ const dict = t(lang);
 ---
 
 <nav
-  class="flex items-center gap-0.5 rounded-full border border-line bg-surface p-0.5 text-xs"
+  class="border-line bg-surface flex items-center gap-0.5 rounded-full border p-0.5 text-xs"
   aria-label={dict.langSwitcherLabel}
 >
   {
@@ -23,12 +28,12 @@ const dict = t(lang);
         <a
           href={href}
           hreflang={code}
-          aria-current={isActive ? 'true' : undefined}
+          aria-current={isActive ? "true" : undefined}
           class:list={[
-            'rounded-full px-2.5 py-1 font-medium tabular-nums transition-colors',
+            "rounded-full px-2.5 py-1 font-medium tabular-nums transition-colors",
             isActive
-              ? 'bg-fg text-accent-fg'
-              : 'text-muted hover:bg-line-subtle hover:text-fg',
+              ? "bg-fg text-accent-fg"
+              : "text-muted hover:bg-line-subtle hover:text-fg",
           ]}
           title={localeNames[code]}
         >

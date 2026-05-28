@@ -1,8 +1,8 @@
 ---
-import type { Tool } from '../data/tools';
-import { t } from '../i18n/utils';
-import { localizePath } from '../i18n/utils';
-import type { Locale } from '../i18n/ui';
+import type { Tool } from "../data/tools";
+import { t } from "../i18n/utils";
+import { localizePath } from "../i18n/utils";
+import type { Locale } from "../i18n/ui";
 
 interface Props {
   tool: Tool;
@@ -16,27 +16,33 @@ const href = localizePath(`/tools/${tool.slug}`, lang);
 
 <a
   href={href}
-  class="group flex flex-col rounded-2xl border border-line bg-surface p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-accent-line hover:shadow-md"
+  class="group border-line bg-surface hover:border-accent-line flex flex-col rounded-2xl border p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
 >
   <div class="mb-3 flex flex-wrap items-center gap-2">
-    <span class="rounded-full bg-line-subtle px-2.5 py-1 text-xs font-medium text-muted">
+    <span
+      class="bg-line-subtle text-muted rounded-full px-2.5 py-1 text-xs font-medium"
+    >
       {tool.category[lang]}
     </span>
     {
       tool.requiresLogin && (
-        <span class="rounded-full bg-fg px-2.5 py-1 text-xs font-medium text-accent-fg">
+        <span class="bg-fg text-accent-fg rounded-full px-2.5 py-1 text-xs font-medium">
           {dict.cardRequiresLogin}
         </span>
       )
     }
   </div>
 
-  <h2 class="text-lg font-semibold text-fg">
+  <h2 class="text-fg text-lg font-semibold">
     {tool.name[lang]}
   </h2>
-  <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{tool.tagline[lang]}</p>
+  <p class="text-muted mt-2 flex-1 text-sm leading-relaxed">
+    {tool.tagline[lang]}
+  </p>
 
-  <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
+  <span
+    class="text-accent mt-4 inline-flex items-center gap-1 text-sm font-medium"
+  >
     {dict.cardOpen}
     <svg
       class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -46,7 +52,10 @@ const href = localizePath(`/tools/${tool.slug}`, lang);
       stroke-width="2"
       aria-hidden="true"
     >
-      <path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path
+        d="M4 10h12M11 5l5 5-5 5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
     </svg>
   </span>
 </a>
