@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ToolEmbed from "./ToolEmbed.astro";
 import type { Tool } from "../data/tools";
 import { localizePath, t } from "../i18n/utils";
-import { htmlLangAttr, type Locale } from "../i18n/ui";
+import { dateLocale, htmlLangAttr, type Locale } from "../i18n/ui";
 
 interface Props {
   tool: Tool;
@@ -12,6 +12,13 @@ interface Props {
 
 const { tool, lang } = Astro.props;
 const dict = t(lang);
+
+const updatedDisplay = new Intl.DateTimeFormat(dateLocale[lang], {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+}).format(new Date(tool.updatedAt));
 
 const siteUrl = Astro.site?.href ?? "https://labs.soundbluemusic.com/";
 const toolPath = localizePath(`/tools/${tool.slug}`, lang);
@@ -29,6 +36,7 @@ const jsonLd = {
       applicationCategory: "MultimediaApplication",
       operatingSystem: "Web",
       inLanguage: htmlLangAttr[lang],
+      dateModified: tool.updatedAt,
       isAccessibleForFree: true,
       offers: { "@type": "Offer", price: "0", priceCurrency: "KRW" },
       publisher: {
@@ -98,6 +106,10 @@ const jsonLd = {
     <p class="text-muted mt-3 max-w-2xl text-lg">{tool.tagline[lang]}</p>
     <p class="text-muted mt-4 max-w-2xl leading-relaxed">
       {tool.description[lang]}
+    </p>
+    <p class="text-faint mt-4 text-sm">
+      {dict.toolUpdatedAt} ·{" "}
+      <time datetime={tool.updatedAt}>{updatedDisplay}</time>
     </p>
 
     {

@@ -26,6 +26,13 @@ export const ogLocale: Record<Locale, string> = {
   ja: "ja_JP",
 };
 
+/** BCP-47 tags for Intl date formatting. */
+export const dateLocale: Record<Locale, string> = {
+  ko: "ko-KR",
+  en: "en-US",
+  ja: "ja-JP",
+};
+
 export const ui = {
   ko: {
     siteName: "labs by soundbluemusic",
@@ -47,6 +54,7 @@ export const ui = {
       "아래 임베드 안의 로그인 버튼이 동작하지 않으면(Safari 등 3rd-party 쿠키 제한), 먼저 claude.ai에 로그인하거나 「Claude에서 열기」로 새 탭에서 사용하세요.",
     toolRequiresLoginCTA: "claude.ai 로그인 →",
     toolOpenInClaude: "Claude에서 열기 ↗",
+    toolUpdatedAt: "최근 업데이트",
     toolSourceLabel: "원본 아티팩트:",
     toolSourceLink: "claude.ai에서 보기 ↗",
     embedFullscreen: "전체화면",
@@ -78,6 +86,7 @@ export const ui = {
       "If the login button inside the embed below doesn't respond (some browsers block third-party cookies, e.g. Safari), sign in to claude.ai first, or use “Open in Claude” to launch it in a new tab.",
     toolRequiresLoginCTA: "Sign in to claude.ai →",
     toolOpenInClaude: "Open in Claude ↗",
+    toolUpdatedAt: "Last updated",
     toolSourceLabel: "Original artifact:",
     toolSourceLink: "View on claude.ai ↗",
     embedFullscreen: "Fullscreen",
@@ -110,6 +119,7 @@ export const ui = {
       "下の埋め込み内のログインボタンが反応しない場合(Safariなどサードパーティ Cookie 制限)、先に claude.ai でログインするか、「Claudeで開く」から新しいタブで使用してください。",
     toolRequiresLoginCTA: "claude.aiにログイン →",
     toolOpenInClaude: "Claudeで開く ↗",
+    toolUpdatedAt: "最終更新",
     toolSourceLabel: "元のアーティファクト:",
     toolSourceLink: "claude.aiで開く ↗",
     embedFullscreen: "全画面",
