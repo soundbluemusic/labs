@@ -15,7 +15,8 @@ export interface Tool {
   category: LocalizedString;
   /** claude.site embed URL (…/embed) used inside the iframe */
   embedUrl: string;
-  /** Original published artifact URL (without /embed) */
+  /** Canonical artifact page on claude.ai where a logged-in user can run it.
+   * (claude.site only serves the /embed path; its bare URL 404s.) */
   artifactUrl: string;
   /** Whether the tool calls Claude at runtime and therefore needs the viewer to be logged in */
   requiresLogin: boolean;
@@ -45,9 +46,9 @@ export const tools: Tool[] = [
       ja: "音声・オーディオ",
     },
     embedUrl:
-      "https://claude.site/public/artifacts/83e81ef4-f3af-4092-a2f8-3dba0a87414d/embed",
+      "https://claude.site/public/artifacts/a956aeb4-94be-4b24-9706-2948f61c00e1/embed",
     artifactUrl:
-      "https://claude.site/public/artifacts/83e81ef4-f3af-4092-a2f8-3dba0a87414d",
+      "https://claude.ai/public/artifacts/a956aeb4-94be-4b24-9706-2948f61c00e1",
     requiresLogin: true,
   },
 ];

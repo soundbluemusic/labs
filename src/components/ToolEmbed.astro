@@ -45,13 +45,19 @@ const dict = t(lang);
         sees the iframe entering the viewport so the inner frame measures itself
         as visible and renders. */
     }
+    {
+      /* allow: delegate Permissions Policy to the cross-origin artifact frame so
+        the tool's Claude login can use the Storage Access API (to regain
+        third-party cookies) and FedCM. Without this, browsers that block
+        third-party cookies leave the in-embed login non-functional. */
+    }
     <iframe
       data-deferred-src={tool.embedUrl}
       title={tool.name[lang]}
       width="100%"
       height="600"
       frameborder="0"
-      allow="clipboard-write"
+      allow="clipboard-write; clipboard-read; storage-access; identity-credentials-get"
       allowfullscreen></iframe>
   </div>
 </div>
