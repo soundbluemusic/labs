@@ -20,6 +20,8 @@ export interface Tool {
   artifactUrl: string;
   /** Whether the tool calls Claude at runtime and therefore needs the viewer to be logged in */
   requiresLogin: boolean;
+  /** Date the tool/artifact was last updated (ISO YYYY-MM-DD); bump when republishing */
+  updatedAt: string;
 }
 
 export const tools: Tool[] = [
@@ -50,6 +52,7 @@ export const tools: Tool[] = [
     artifactUrl:
       "https://claude.ai/public/artifacts/a956aeb4-94be-4b24-9706-2948f61c00e1",
     requiresLogin: true,
+    updatedAt: "2026-05-31",
   },
 ];
 
