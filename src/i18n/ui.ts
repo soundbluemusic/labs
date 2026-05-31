@@ -51,8 +51,7 @@ export const ui = {
     toolRequiresLoginBody:
       "도구가 Claude AI를 직접 호출하기 때문에, Claude에 로그인되어 있어야 사용할 수 있어요. 생성 사용량은 본인 Claude 계정에서 소모됩니다.",
     toolRequiresLoginHint:
-      "아래 임베드 안의 로그인 버튼이 동작하지 않으면(Safari 등 3rd-party 쿠키 제한), 먼저 claude.ai에 로그인하거나 「Claude에서 열기」로 새 탭에서 사용하세요.",
-    toolRequiresLoginCTA: "claude.ai 로그인 →",
+      "아래 임베드 안의 로그인 버튼이 동작하지 않으면(Safari 등 3rd-party 쿠키 제한), 「Claude에서 열기」로 새 탭에서 로그인 상태 그대로 사용하세요.",
     toolOpenInClaude: "Claude에서 열기 ↗",
     toolUpdatedAt: "최근 업데이트",
     toolSourceLabel: "원본 아티팩트:",
@@ -83,8 +82,7 @@ export const ui = {
     toolRequiresLoginBody:
       "Because the tool calls Claude AI directly, you need to be signed in to Claude to use it. Generation usage is billed to your own Claude account.",
     toolRequiresLoginHint:
-      "If the login button inside the embed below doesn't respond (some browsers block third-party cookies, e.g. Safari), sign in to claude.ai first, or use “Open in Claude” to launch it in a new tab.",
-    toolRequiresLoginCTA: "Sign in to claude.ai →",
+      "If the login button inside the embed below doesn't respond (some browsers block third-party cookies, e.g. Safari), use “Open in Claude” to launch it in a new tab with your session intact.",
     toolOpenInClaude: "Open in Claude ↗",
     toolUpdatedAt: "Last updated",
     toolSourceLabel: "Original artifact:",
@@ -116,8 +114,7 @@ export const ui = {
     toolRequiresLoginBody:
       "ツールが直接Claude AIを呼び出すため、Claudeにログインしている必要があります。生成に使う消費量はご自身のClaudeアカウントから引かれます。",
     toolRequiresLoginHint:
-      "下の埋め込み内のログインボタンが反応しない場合(Safariなどサードパーティ Cookie 制限)、先に claude.ai でログインするか、「Claudeで開く」から新しいタブで使用してください。",
-    toolRequiresLoginCTA: "claude.aiにログイン →",
+      "下の埋め込み内のログインボタンが反応しない場合(Safariなどサードパーティ Cookie 制限)、「Claudeで開く」から新しいタブでログイン状態のまま使用してください。",
     toolOpenInClaude: "Claudeで開く ↗",
     toolUpdatedAt: "最終更新",
     toolSourceLabel: "元のアーティファクト:",
