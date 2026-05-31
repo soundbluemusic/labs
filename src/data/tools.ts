@@ -45,9 +45,9 @@ export const tools: Tool[] = [
       ja: "音声・オーディオ",
     },
     embedUrl:
-      "https://claude.site/public/artifacts/83e81ef4-f3af-4092-a2f8-3dba0a87414d/embed",
+      "https://claude.site/public/artifacts/a956aeb4-94be-4b24-9706-2948f61c00e1/embed",
     artifactUrl:
-      "https://claude.site/public/artifacts/83e81ef4-f3af-4092-a2f8-3dba0a87414d",
+      "https://claude.site/public/artifacts/a956aeb4-94be-4b24-9706-2948f61c00e1",
     requiresLogin: true,
   },
 ];
