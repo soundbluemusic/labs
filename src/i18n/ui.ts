@@ -58,6 +58,9 @@ export const ui = {
     toolSourceLink: "claude.ai에서 보기 ↗",
     embedFullscreen: "전체화면",
     embedNewTab: "새 탭에서 열기 ↗",
+    embedPreviewLabel:
+      "아래는 미리보기예요. 실제로 쓰려면 로그인된 Claude에서 열어야 해요.",
+    embedPreviewCta: "Claude에서 사용하기 ↗",
     notFoundTitle: "페이지를 찾을 수 없어요",
     notFoundLead: "주소가 바뀌었거나 삭제된 페이지일 수 있어요.",
     notFoundHome: "← 홈으로 돌아가기",
@@ -89,6 +92,9 @@ export const ui = {
     toolSourceLink: "View on claude.ai ↗",
     embedFullscreen: "Fullscreen",
     embedNewTab: "Open in new tab ↗",
+    embedPreviewLabel:
+      "Below is a preview. To actually use it, open it in Claude where you're signed in.",
+    embedPreviewCta: "Use in Claude ↗",
     notFoundTitle: "Page not found",
     notFoundLead:
       "The address may have changed, or the page may have been removed.",
@@ -121,6 +127,9 @@ export const ui = {
     toolSourceLink: "claude.aiで開く ↗",
     embedFullscreen: "全画面",
     embedNewTab: "新しいタブで開く ↗",
+    embedPreviewLabel:
+      "以下はプレビューです。実際に使うには、ログイン済みのClaudeで開いてください。",
+    embedPreviewCta: "Claudeで使う ↗",
     notFoundTitle: "ページが見つかりません",
     notFoundLead: "URLが変わったか、ページが削除された可能性があります。",
     notFoundHome: "← ホームに戻る",

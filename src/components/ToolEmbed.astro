@@ -38,6 +38,22 @@ const dict = t(lang);
     </div>
   </div>
 
+  <div
+    class="border-accent-line bg-accent-soft flex flex-wrap items-center justify-between gap-2 border-b px-4 py-2.5"
+  >
+    <span class="text-muted text-xs leading-relaxed">
+      {dict.embedPreviewLabel}
+    </span>
+    <a
+      href={tool.artifactUrl}
+      target="_blank"
+      rel="noopener"
+      class="bg-accent text-accent-fg hover:bg-accent-strong inline-flex shrink-0 items-center gap-1 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors"
+    >
+      {dict.embedPreviewCta}
+    </a>
+  </div>
+
   <div class="embed-frame">
     {
       /* Plain, standards-compliant embed: src is set directly so the iframe
