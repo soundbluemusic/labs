@@ -1,57 +1,14 @@
-// 도구2 고수준 API — 코퍼스+시드 로드 → greedySelect → 시드 보장 게이트 → 결과/통계/대본텍스트.
-// 전부 브라우저에서 실행. 네트워크/로그인 0.
-import corpusData from "./corpus.json";
+// 도구2 고수준 API — 알고리즘 합성기로 새 대화를 생성한 뒤 음소 균형 선별.
+// 코퍼스(사용자 txt) 재사용 없음. 런타임 LLM/네트워크 없음.
 import seedData from "./seeds.json";
-import { greedySelect, buildTargets, type Dialogue, type SelectResult } from "./select";
-import {
-  coverageVector,
-  spellingFinalSet,
-  CHO,
-  JUNG,
-  REP_FINALS,
-  L2_JAMO,
-} from "./coverage";
+import { greedySelect, buildTargets, type Dialogue } from "./select";
+import { coverageVector, spellingFinalSet, CHO, JUNG, REP_FINALS, L2_JAMO } from "./coverage";
+import { synthesizePool } from "./synth";
 
-interface CorpusDialogue {
-  id: string;
-  register?: string;
-  turns: string[];
-  speakers?: string[];
-}
-interface SeedDialogue {
-  id: string;
-  targetJamo: string;
-  layer: "L1" | "L2";
-  register?: string;
-  turns: string[];
-}
-
-const corpus = corpusData as { dialogues: CorpusDialogue[] };
+interface SeedDialogue { id: string; targetJamo: string; layer: "L1" | "L2"; turns: string[]; }
 const seeds = seedData as { dialogues: SeedDialogue[] };
-
 const altSpeakers = (turns: string[]) => turns.map((_, i) => (i % 2 === 0 ? "A" : "B"));
 
-function buildPool(): Dialogue[] {
-  return [
-    ...corpus.dialogues.map((d) => ({
-      id: d.id,
-      turns: d.turns,
-      speakers: d.speakers ?? altSpeakers(d.turns),
-      kind: "natural" as const,
-    })),
-    ...seeds.dialogues.map((d) => ({
-      id: d.id,
-      turns: d.turns,
-      speakers: altSpeakers(d.turns),
-      kind: "rare-seed" as const,
-      l2: d.layer === "L2" ? d.targetJamo : null,
-    })),
-  ];
-}
-
-const POOL = buildPool();
-
-/** L2 희귀자모가 선택에 없으면 해당 시드를 강제 포함(자연 대화 1개와 교체). */
 function seedGate(selected: Dialogue[], pool: Dialogue[]): void {
   const present = new Set<string>();
   for (const d of selected) for (const j of spellingFinalSet(d.turns)) present.add(j);
@@ -61,13 +18,9 @@ function seedGate(selected: Dialogue[], pool: Dialogue[]): void {
     if (!seed) continue;
     let swapIdx = -1;
     for (let i = selected.length - 1; i >= 0; i--) {
-      if (selected[i].kind === "natural") {
-        swapIdx = i;
-        break;
-      }
+      if (selected[i].kind === "natural") { swapIdx = i; break; }
     }
-    if (swapIdx >= 0) selected[swapIdx] = seed;
-    else selected.push(seed);
+    if (swapIdx >= 0) selected[swapIdx] = seed; else selected.push(seed);
     for (const jj of spellingFinalSet(seed.turns)) present.add(jj);
   }
 }
@@ -86,10 +39,10 @@ export function coverageStat(selected: Dialogue[], minCoverage = 10): CoverageSt
     for (const k in v) totals[k] = (totals[k] || 0) + v[k];
   }
   const t = buildTargets(minCoverage);
-  const grp = (list: readonly string[], pre: string) => {
-    const met = list.filter((c) => (totals[pre + c] || 0) >= t[pre + c]).length;
-    return { met, total: list.length };
-  };
+  const grp = (list: readonly string[], pre: string) => ({
+    met: list.filter((c) => (totals[pre + c] || 0) >= t[pre + c]).length,
+    total: list.length,
+  });
   const present = new Set<string>();
   for (const d of selected) for (const j of spellingFinalSet(d.turns)) present.add(j);
   return {
@@ -114,13 +67,22 @@ export function generate(opts: { minCoverage?: number; targetCount?: number; see
   const minCoverage = opts.minCoverage ?? 10;
   const targetCount = opts.targetCount ?? 200;
   const seed = opts.seed ?? Math.floor(Math.random() * 0x7fffffff) + 1;
-  const result: SelectResult = greedySelect(
-    POOL.map((d) => ({ ...d, vec: undefined, syll: undefined })),
-    { minCoverage, targetCount, temperature: 0.5, seed },
-  );
-  seedGate(result.selected, POOL);
 
-  const dialogues = result.selected.map((d) => ({
+  // 1) 알고리즘 합성기로 후보 대화 대량 생성 (매 실행 다른 seed → 다른 조합)
+  const synth = synthesizePool(targetCount * 3, seed);
+  const pool: Dialogue[] = synth.map((d, i) => ({
+    id: "g-" + i, turns: d.turns, speakers: d.speakers, kind: "natural" as const,
+  }));
+  // 2) 손작성 희귀자모 시드 합류 (ㅞ/ㅒ + L2 보장)
+  for (const s of seeds.dialogues) {
+    pool.push({ id: s.id, turns: s.turns, speakers: altSpeakers(s.turns), kind: "rare-seed", l2: s.layer === "L2" ? s.targetJamo : null });
+  }
+  // 3) 음소 균형 선별 + 시드 게이트
+  const target = Math.min(targetCount, pool.length);
+  const { selected } = greedySelect(pool.map((d) => ({ ...d, vec: undefined, syll: undefined })), { minCoverage, targetCount: target, temperature: 0.5, seed });
+  seedGate(selected, pool);
+
+  const dialogues = selected.map((d) => ({
     speakers: d.speakers ?? altSpeakers(d.turns),
     turns: d.turns,
     syllables: d.turns.map(syll),
@@ -130,11 +92,10 @@ export function generate(opts: { minCoverage?: number; targetCount?: number; see
     totalDialogues: dialogues.length,
     totalTurns: dialogues.reduce((s, d) => s + d.turns.length, 0),
     totalSyllables: dialogues.reduce((s, d) => s + d.syllables.reduce((a, b) => a + b, 0), 0),
-    coverage: coverageStat(result.selected, minCoverage),
+    coverage: coverageStat(selected, minCoverage),
   };
 }
 
-/** 다운로드용 대본 텍스트 (도구1 voice_script.txt 형식). */
 export function formatScript(script: GeneratedScript): string {
   return script.dialogues
     .map((d, i) => {
@@ -143,5 +104,3 @@ export function formatScript(script: GeneratedScript): string {
     })
     .join("\n\n");
 }
-
-export const poolSize = POOL.length;

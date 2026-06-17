@@ -8,4 +8,11 @@ export {
   JONG,
   toPronunciation,
   applyFinalConsonantRule,
+  selectAOrEo,
+  applyIrregular,
+  getIrregularType,
+  hasBatchim,
+  getBatchim,
+  changeBatchim,
+  removeBatchim,
 } from '../../../src/lib/hangul/index.ts';
