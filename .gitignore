@@ -24,3 +24,8 @@ pnpm-debug.log*
 
 # cloudflare / wrangler
 .wrangler/
+
+# scratch / tool artifacts
+.playwright-mcp/
+talk/
+local/voice-script-builder-algo/proto/hangul.bundle.mjs
