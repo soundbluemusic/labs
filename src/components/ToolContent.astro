@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ToolEmbed from "./ToolEmbed.astro";
+import VoiceScriptGenerator from "./VoiceScriptGenerator.astro";
 import type { Tool } from "../data/tools";
 import { localizePath, t } from "../i18n/utils";
 import { dateLocale, htmlLangAttr, type Locale } from "../i18n/ui";
@@ -137,19 +138,29 @@ const jsonLd = {
     }
 
     <div class="mt-8">
-      <ToolEmbed tool={tool} lang={lang} />
+      {
+        tool.native ? (
+          <VoiceScriptGenerator lang={lang} />
+        ) : (
+          <ToolEmbed tool={tool} lang={lang} />
+        )
+      }
     </div>
 
-    <p class="text-faint mt-6 text-sm">
-      {dict.toolSourceLabel}{" "}
-      <a
-        class="hover:text-muted underline transition-colors"
-        href={tool.artifactUrl}
-        target="_blank"
-        rel="noopener"
-      >
-        {dict.toolSourceLink}
-      </a>
-    </p>
+    {
+      tool.artifactUrl && (
+        <p class="text-faint mt-6 text-sm">
+          {dict.toolSourceLabel}{" "}
+          <a
+            class="hover:text-muted underline transition-colors"
+            href={tool.artifactUrl}
+            target="_blank"
+            rel="noopener"
+          >
+            {dict.toolSourceLink}
+          </a>
+        </p>
+      )
+    }
   </article>
 </BaseLayout>
