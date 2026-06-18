@@ -41,6 +41,7 @@ const g = {
     copied: "복사됨!",
     dialogue: "대화",
     scoreUnit: "점",
+    avgLabel: "평균",
   },
   en: {
     offline: "Offline · no login",
@@ -55,6 +56,7 @@ const g = {
     copied: "Copied!",
     dialogue: "Dialogue",
     scoreUnit: "",
+    avgLabel: "avg",
   },
   ja: {
     offline: "オフライン・ログイン不要",
@@ -69,6 +71,7 @@ const g = {
     copied: "コピーしました!",
     dialogue: "対話",
     scoreUnit: "点",
+    avgLabel: "平均",
   },
 }[lang];
 
@@ -91,7 +94,7 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
       <span class="font-mono">{curated.count}</span> {g.stat} ·{" "}
       <span class="font-mono">{minutes}</span> {g.min} ·{" "}
       <span class="font-mono">{curated.syllables.toLocaleString()}</span> {g.syl} ·{" "}
-      <span class="text-emerald-600">≥<span class="font-mono">{curated.cutScore.toFixed(1)}</span>{g.scoreUnit}</span>
+      <span class="text-emerald-600">{g.avgLabel} <span class="font-mono">{curated.avgScore.toFixed(1)}</span>{g.scoreUnit}</span>
     </div>
     <div class="flex shrink-0 items-center gap-2">
       <button id="vsg-copy" type="button" data-copy={g.copy} data-copied={g.copied} class="border-line text-muted hover:bg-line-subtle hover:text-fg rounded-lg border px-4 py-1.5 text-sm font-medium transition-colors">
