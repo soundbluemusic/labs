@@ -37,6 +37,8 @@ const g = {
     cov: "발음 커버리지",
     cho: "초성", jung: "중성", fin: "종성",
     download: "전체 다운로드 (.txt)",
+    copy: "복사",
+    copied: "복사됨!",
     dialogue: "대화",
     scoreUnit: "점",
   },
@@ -49,6 +51,8 @@ const g = {
     cov: "Phoneme coverage",
     cho: "Onset", jung: "Nucleus", fin: "Coda",
     download: "Download all (.txt)",
+    copy: "Copy",
+    copied: "Copied!",
     dialogue: "Dialogue",
     scoreUnit: "",
   },
@@ -61,6 +65,8 @@ const g = {
     cov: "発音カバレッジ",
     cho: "初声", jung: "中声", fin: "終声",
     download: "全部ダウンロード (.txt)",
+    copy: "コピー",
+    copied: "コピーしました!",
     dialogue: "対話",
     scoreUnit: "点",
   },
@@ -87,9 +93,14 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
       <span class="font-mono">{curated.syllables.toLocaleString()}</span> {g.syl} ·{" "}
       <span class="text-emerald-600">≥<span class="font-mono">{curated.cutScore.toFixed(1)}</span>{g.scoreUnit}</span>
     </div>
-    <button id="vsg-download" type="button" class="bg-fg text-bg hover:opacity-90 rounded-lg px-4 py-1.5 text-sm font-semibold transition-opacity">
-      {g.download}
-    </button>
+    <div class="flex shrink-0 items-center gap-2">
+      <button id="vsg-copy" type="button" data-copy={g.copy} data-copied={g.copied} class="border-line text-muted hover:bg-line-subtle hover:text-fg rounded-lg border px-4 py-1.5 text-sm font-medium transition-colors">
+        {g.copy}
+      </button>
+      <button id="vsg-download" type="button" class="bg-fg text-bg hover:opacity-90 rounded-lg px-4 py-1.5 text-sm font-semibold transition-opacity">
+        {g.download}
+      </button>
+    </div>
   </div>
 
   <div class="border-line-subtle bg-bg flex flex-wrap items-center gap-x-4 gap-y-1.5 border-b px-4 py-2.5 text-xs">
@@ -135,5 +146,30 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
     a.download = "recording_script_30min.txt";
     a.click();
     URL.revokeObjectURL(url);
+  });
+
+  const copyBtn = document.getElementById("vsg-copy") as HTMLButtonElement | null;
+  copyBtn?.addEventListener("click", async () => {
+    const text = root?.dataset.script || "";
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    const done = copyBtn.dataset.copied || "Copied!";
+    const label = copyBtn.dataset.copy || "Copy";
+    copyBtn.textContent = done;
+    copyBtn.classList.add("text-emerald-600");
+    setTimeout(() => {
+      copyBtn.textContent = label;
+      copyBtn.classList.remove("text-emerald-600");
+    }, 1500);
   });
 </script>
