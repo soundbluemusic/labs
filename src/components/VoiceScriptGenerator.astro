@@ -30,7 +30,7 @@ const scriptText = curated.dialogues
 const g = {
   ko: {
     offline: "오프라인 · 로그인 불필요",
-    intro: `도구1로 생성한 대화를 원어민 심사로 엄선한 녹음 대본입니다. 자연스럽고 반응이 살아있는 8점 이상만 골랐습니다. 소리 내어 읽어 음성 복제(TTS) 학습용으로 쓰세요.`,
+    intro: `도구1로 생성한 대화를 원어민 리뷰어 3인이 0.1~5.0점으로 정밀 채점해, 자연스럽고 반응이 살아있는 상위만 엄선한 녹음 대본입니다. 소리 내어 읽어 음성 복제(TTS) 학습용으로 쓰세요.`,
     stat: "대화",
     min: "분",
     syl: "음절",
@@ -42,7 +42,7 @@ const g = {
   },
   en: {
     offline: "Offline · no login",
-    intro: `A recording script curated by native-speaker review from Tool 1's dialogues — only natural, genuinely reactive ones (score 8+). Read it aloud for TTS / voice-cloning training.`,
+    intro: `A recording script curated from Tool 1's dialogues, each precisely scored 0.1–5.0 by three native-speaker reviewers — only the top, natural, genuinely reactive ones are kept. Read it aloud for TTS / voice-cloning training.`,
     stat: "dialogues",
     min: "min",
     syl: "syllables",
@@ -54,7 +54,7 @@ const g = {
   },
   ja: {
     offline: "オフライン・ログイン不要",
-    intro: `ツール1の対話をネイティブ審査で厳選した録音台本です。自然で反応が生きている8点以上だけを選びました。音読してTTS・音声クローニング学習にお使いください。`,
+    intro: `ツール1の対話をネイティブ3人が0.1〜5.0で精密採点し、自然で反応が生きている上位だけを厳選した録音台本です。音読してTTS・音声クローニング学習にお使いください。`,
     stat: "対話",
     min: "分",
     syl: "音節",
@@ -84,7 +84,8 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
     <div class="text-fg text-sm font-medium">
       <span class="font-mono">{curated.count}</span> {g.stat} ·{" "}
       <span class="font-mono">{minutes}</span> {g.min} ·{" "}
-      <span class="font-mono">{curated.syllables.toLocaleString()}</span> {g.syl}
+      <span class="font-mono">{curated.syllables.toLocaleString()}</span> {g.syl} ·{" "}
+      <span class="text-emerald-600">≥<span class="font-mono">{curated.cutScore.toFixed(1)}</span>{g.scoreUnit}</span>
     </div>
     <button id="vsg-download" type="button" class="bg-fg text-bg hover:opacity-90 rounded-lg px-4 py-1.5 text-sm font-semibold transition-opacity">
       {g.download}
@@ -105,7 +106,7 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
           <div class="text-faint mb-1 flex items-center gap-2 font-mono text-[10px]">
             <span>{g.dialogue} {i + 1}</span>
             <span class="bg-line-subtle text-muted rounded px-1.5 py-0.5">{d.register}</span>
-            <span class="text-emerald-600">{d.score}{g.scoreUnit}</span>
+            <span class="text-emerald-600">{d.score.toFixed(1)}{g.scoreUnit}</span>
           </div>
           <div class="border-line-subtle space-y-1 border-l-2 pl-1 font-serif text-[15px] leading-relaxed">
             {d.turns.map((t, j) => (
