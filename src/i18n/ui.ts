@@ -1,36 +1,31 @@
-export const locales = ["ko", "en", "ja"] as const;
+export const locales = ["ko", "en"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "ko";
 
 export const localeNames: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
-  ja: "日本語",
 };
 
 export const localeShortLabels: Record<Locale, string> = {
   ko: "KO",
   en: "EN",
-  ja: "JA",
 };
 
 export const htmlLangAttr: Record<Locale, string> = {
   ko: "ko",
   en: "en",
-  ja: "ja",
 };
 
 export const ogLocale: Record<Locale, string> = {
   ko: "ko_KR",
   en: "en_US",
-  ja: "ja_JP",
 };
 
 /** BCP-47 tags for Intl date formatting. */
 export const dateLocale: Record<Locale, string> = {
   ko: "ko-KR",
   en: "en-US",
-  ja: "ja-JP",
 };
 
 export const ui = {
@@ -102,40 +97,6 @@ export const ui = {
     notFoundPageTitle: "Page not found (404)",
     notFoundPageDescription: "The page you requested couldn't be found.",
     langSwitcherLabel: "Language",
-  },
-  ja: {
-    siteName: "labs by soundbluemusic",
-    siteDescription:
-      "Claudeで動くツール集。Claudeにログインすればすぐに使えます。",
-    homeHeroTitle: "Claudeで動くツール",
-    homeHeroLead: (n: number) =>
-      `Claudeにログインすれば使えるツールが${n}個。下からどうぞ。`,
-    homeSectionLabel: "ツール",
-    homeCountSuffix: (n: number) => `${n}個`,
-    cardOpen: "開く",
-    cardRequiresLogin: "Claudeログインが必要",
-    backToTools: "← すべてのツール",
-    breadcrumbHome: "ホーム",
-    toolRequiresLoginTitle: "このツールはClaudeへのログインが必要です。",
-    toolRequiresLoginBody:
-      "ツールが直接Claude AIを呼び出すため、Claudeにログインしている必要があります。生成に使う消費量はご自身のClaudeアカウントから引かれます。",
-    toolRequiresLoginHint:
-      "すでにClaudeにログインしているのに、埋め込み内で再度ログインを求められますか? ブラウザが他サイト内のCookie(サードパーティCookie)をブロックするため、ログインは埋め込みの外でしか認識されません。下の「Claudeで開く」を押すと、ログイン状態のまま新しいタブで使えます。",
-    toolOpenInClaude: "Claudeで開く ↗",
-    toolUpdatedAt: "最終更新",
-    toolSourceLabel: "元のアーティファクト:",
-    toolSourceLink: "claude.aiで開く ↗",
-    embedFullscreen: "全画面",
-    embedNewTab: "新しいタブで開く ↗",
-    embedPreviewLabel:
-      "以下はプレビューです。実際に使うには、ログイン済みのClaudeで開いてください。",
-    embedPreviewCta: "Claudeで使う ↗",
-    notFoundTitle: "ページが見つかりません",
-    notFoundLead: "URLが変わったか、ページが削除された可能性があります。",
-    notFoundHome: "← ホームに戻る",
-    notFoundPageTitle: "ページが見つかりません (404)",
-    notFoundPageDescription: "お探しのページは見つかりませんでした。",
-    langSwitcherLabel: "言語",
   },
 } as const;
 

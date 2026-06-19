@@ -31,10 +31,10 @@ const description = ui.ko.notFoundPageDescription;
   </section>
 
   <script is:inline>
-    // Best-effort: if the URL starts with /en/ or /ja/, redirect the 404 page lang context too.
+    // Best-effort: if the URL starts with /en/, redirect the 404 page lang context too.
     (function () {
       const seg = location.pathname.split("/").filter(Boolean)[0];
-      if (seg === "en" || seg === "ja") {
+      if (seg === "en") {
         document.documentElement.lang = seg;
       }
     })();

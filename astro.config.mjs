@@ -7,7 +7,7 @@ export default defineConfig({
   site: "https://labs.soundbluemusic.com",
   i18n: {
     defaultLocale: "ko",
-    locales: ["ko", "en", "ja"],
+    locales: ["ko", "en"],
     routing: {
       prefixDefaultLocale: false,
     },
@@ -16,7 +16,7 @@ export default defineConfig({
     sitemap({
       i18n: {
         defaultLocale: "ko",
-        locales: { ko: "ko-KR", en: "en-US", ja: "ja-JP" },
+        locales: { ko: "ko-KR", en: "en-US" },
       },
     }),
   ],
