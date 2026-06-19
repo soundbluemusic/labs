@@ -42,6 +42,8 @@ const g = {
     dialogue: "대화",
     scoreUnit: "점",
     avgLabel: "평균",
+    bench: "채점 기준 (5.0 만점)",
+    dimNat: "낭독", dimReact: "반응", dimVar: "다양성", dimSpec: "구체성", dimClar: "명료",
   },
   en: {
     offline: "Offline · no login",
@@ -57,6 +59,8 @@ const g = {
     dialogue: "Dialogue",
     scoreUnit: "",
     avgLabel: "avg",
+    bench: "Scoring (out of 5.0)",
+    dimNat: "read", dimReact: "react", dimVar: "variety", dimSpec: "specific", dimClar: "clear",
   },
   ja: {
     offline: "オフライン・ログイン不要",
@@ -72,6 +76,8 @@ const g = {
     dialogue: "対話",
     scoreUnit: "点",
     avgLabel: "平均",
+    bench: "採点基準 (5.0満点)",
+    dimNat: "朗読", dimReact: "反応", dimVar: "多様性", dimSpec: "具体性", dimClar: "明瞭",
   },
 }[lang];
 
@@ -113,6 +119,19 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
     <span><span class="text-muted">{g.fin}</span> <span class={`font-mono font-semibold ${covCls(cov.fin.met, cov.fin.total)}`}>{cov.fin.met}/{cov.fin.total}</span></span>
   </div>
 
+  <div class="border-line-subtle flex flex-wrap items-center gap-x-3 gap-y-1 border-b px-4 py-2.5 text-xs">
+    <span class="text-faint font-medium">{g.bench}:</span>
+    <span class="text-muted">{g.dimNat} <span class="font-mono">{curated.benchmark.naturalness}</span></span>
+    <span class="text-faint">+</span>
+    <span class="text-muted">{g.dimReact} <span class="font-mono">{curated.benchmark.reactivity}</span></span>
+    <span class="text-faint">+</span>
+    <span class="text-muted">{g.dimVar} <span class="font-mono">{curated.benchmark.variety}</span></span>
+    <span class="text-faint">+</span>
+    <span class="text-muted">{g.dimSpec} <span class="font-mono">{curated.benchmark.specificity}</span></span>
+    <span class="text-faint">+</span>
+    <span class="text-muted">{g.dimClar} <span class="font-mono">{curated.benchmark.clarity}</span></span>
+  </div>
+
   <div class="max-h-[70vh] overflow-y-auto px-6 py-4">
     {
       curated.dialogues.map((d, i) => (
@@ -120,8 +139,15 @@ const covCls = (met: number, total: number) => (met >= total ? "text-emerald-600
           <div class="text-faint mb-1 flex items-center gap-2 font-mono text-[10px]">
             <span>{g.dialogue} {i + 1}</span>
             <span class="bg-line-subtle text-muted rounded px-1.5 py-0.5">{d.register}</span>
-            <span class="text-emerald-600">{d.score.toFixed(1)}{g.scoreUnit}</span>
+            <span class="text-emerald-600 font-semibold">{d.score.toFixed(1)}{g.scoreUnit}</span>
           </div>
+          {
+            d.breakdown && (
+              <div class="text-faint mb-1 font-mono text-[10px]">
+                {g.dimNat} {d.breakdown.naturalness} · {g.dimReact} {d.breakdown.reactivity} · {g.dimVar} {d.breakdown.variety} · {g.dimSpec} {d.breakdown.specificity} · {g.dimClar} {d.breakdown.clarity}
+              </div>
+            )
+          }
           <div class="border-line-subtle space-y-1 border-l-2 pl-1 font-serif text-[15px] leading-relaxed">
             {d.turns.map((t, j) => (
               <div class="flex gap-2 pl-3">
