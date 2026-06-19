@@ -30,7 +30,7 @@ const scriptText = curated.dialogues
 const g = {
   ko: {
     offline: "오프라인 · 로그인 불필요",
-    intro: `도구1로 생성한 대화를 AI로 영어 번역했을 때 얼마나 자연스러운지(번역 친화성)를 3인이 0.1~5.0점으로 채점해, 상위만 어투 균형 맞춰 엄선한 대본입니다. 영어를 포함한 각국어로 매끄럽게 번역되는 대화들이에요. 점수는 "영어 번역의 자연스러움"입니다.`,
+    intro: `도구1로 생성한 대화를, 소리 내어 읽었을 때 얼마나 자연스러운지(낭독 적합도)를 3인이 0.1~5.0점으로 채점해, 상위만 어투 8종 균형 + 모든 발음(음소)이 골고루 들어가게 엄선한 보이스 클론용 녹음 대본입니다. 한국어로 녹음해 일레븐랩스 같은 곳에서 음성 복제용으로 쓰세요. 점수는 "낭독 자연스러움"입니다.`,
     stat: "대화",
     min: "분",
     syl: "음절",
@@ -45,7 +45,7 @@ const g = {
   },
   en: {
     offline: "Offline · no login",
-    intro: `Korean dialogues from Tool 1, each scored 0.1–5.0 by three reviewers for how naturally it translates into English via AI — only the most translation-friendly ones are kept, balanced across speech styles. These translate smoothly into English (and other languages). The score is "naturalness of the English translation."`,
+    intro: `Korean dialogues from Tool 1, each scored 0.1–5.0 by three reviewers for how natural it sounds read aloud — only the top ones are kept, balanced across 8 speech styles and across every Korean phoneme. A recording script for voice cloning: record it in Korean and use it to clone a voice (e.g. on ElevenLabs). The score is "read-aloud naturalness."`,
     stat: "dialogues",
     min: "min",
     syl: "syllables",
@@ -60,7 +60,7 @@ const g = {
   },
   ja: {
     offline: "オフライン・ログイン不要",
-    intro: `ツール1の対話を、AIで英語に翻訳したときどれだけ自然か(翻訳しやすさ)を3人が0.1〜5.0で採点し、上位だけを語調バランスを取って厳選した台本です。英語を含む各言語に滑らかに翻訳される対話です。スコアは「英語翻訳の自然さ」です。`,
+    intro: `ツール1の対話を、音読したときどれだけ自然か(朗読適性)を3人が0.1〜5.0で採点し、上位だけを8つの語調バランス＋すべての発音(音素)が均等に入るよう厳選したボイスクローン用の録音台本です。韓国語で録音し、ElevenLabsなどで音声クローンにお使いください。スコアは「音読の自然さ」です。`,
     stat: "対話",
     min: "分",
     syl: "音節",
